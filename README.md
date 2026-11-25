@@ -1,52 +1,52 @@
 # Top-Down Survival
 
-A 2D top-down survival game made with Unity 6 (6000.3 LTS, URP 2D).
+2D top-down survival hra vytvorená v Unity 6 (6000.3 LTS, URP 2D).
 
-## Features
+## Funkcie
 
-- **Player movement** – 8-directional physics movement (keyboard or gamepad), blocked by water, trees and rocks.
-- **Resource gathering** – chop trees for wood, mine rocks for stone, pick mushrooms. Hold the gather button near a highlighted resource.
-- **Inventory** – 24 stacking slots. The first row is the always-visible hotbar; open the full window to move, merge and swap stacks.
-- **Save / load** – JSON save in `Application.persistentDataPath/savegame.json`. Loads on start, saves on quit.
-- **Procedural world** – infinite, seeded, chunk-streamed world with water, beaches, grassland, forest and rocky biomes. Only the seed and harvested resources are saved.
+- **Pohyb hráča** – pohyb v 8 smeroch založený na fyzike (klávesnica alebo gamepad), cez vodu, stromy a kamene sa neprejde.
+- **Zbieranie surovín** – rúbanie stromov na drevo, ťaženie kameňov na kameň, zbieranie húb. Podrž tlačidlo zbierania pri zvýraznenej surovine.
+- **Inventár** – 24 slotov so stohovaním predmetov. Prvý riadok je stále viditeľný hotbar; v okne inventára môžeš predmety presúvať, spájať a vymieňať.
+- **Ukladanie / načítanie** – JSON uloženie v `Application.persistentDataPath/savegame.json`. Načíta sa pri spustení a uloží pri ukončení hry.
+- **Procedurálny svet** – nekonečný svet generovaný zo seedu, načítavaný po chunkoch, s biómami: voda, pláže, lúky, les a skalnatý terén. Ukladá sa iba seed a vyťažené suroviny.
 
-## Controls
+## Ovládanie
 
-| Action | Keys |
+| Akcia | Klávesy |
 |---|---|
-| Move | WASD / Arrow keys / Left stick |
-| Gather | E / Space / Left mouse / Gamepad West |
-| Inventory | Tab / I (Esc closes) |
-| Save / Load | F5 / F9 |
-| New world | F10 |
+| Pohyb | WASD / šípky / ľavá páčka |
+| Zbieranie | E / medzerník / ľavé tlačidlo myši / gamepad West |
+| Inventár | Tab / I (Esc zatvorí) |
+| Uložiť / Načítať | F5 / F9 |
+| Nový svet | F10 |
 
-## Getting started
+## Začíname
 
-1. Open the project with Unity **6000.3.28f1**.
-2. Open `Assets/Scenes/Main.unity` and press Play.
+1. Otvor projekt v Unity **6000.3.28f1**.
+2. Otvor `Assets/Scenes/Main.unity` a stlač Play.
 
-`Survival > Rebuild Content and Main Scene` regenerates tiles, items, resource prefabs and the main scene from the sprites in `Assets/Art/Sprites`.
+Položka menu `Survival > Rebuild Content and Main Scene` znovu vygeneruje dlaždice, predmety, prefaby surovín a hlavnú scénu zo spritov v `Assets/Art/Sprites`.
 
-## Project layout
+## Štruktúra projektu
 
 ```
 Assets/
-  Art/Sprites     pixel art (16 px per unit)
-  Art/Tiles       tile assets for the tilemaps
-  Data            item definitions + item database
-  Prefabs         resource node prefabs
-  Scripts/        game code (Survival assembly)
-    Core          GameManager (new game, save/load)
+  Art/Sprites     pixel art (16 px na jednotku)
+  Art/Tiles       dlaždice pre tilemapy
+  Data            definície predmetov + databáza predmetov
+  Prefabs         prefaby surovín
+  Scripts/        herný kód (assembly Survival)
+    Core          GameManager (nová hra, uloženie/načítanie)
     Inventory     Inventory, InventorySlot
     Items         ItemDefinition, ItemDatabase
     Player        PlayerMovement, PlayerGatherer, CameraFollow
     Save          SaveData, SaveSystem
     UI            InventoryUI, MessageToast
     World         TerrainSampler, WorldGenerator, ResourceNode
-    Editor        content/scene builder, sprite import settings
-  Tests/EditMode  unit tests (inventory, world generation, save system)
+    Editor        generátor obsahu/scény, nastavenia importu spritov
+  Tests/EditMode  unit testy (inventár, generovanie sveta, ukladanie)
 ```
 
-## Credits
+## Autori grafiky
 
-Art: [Tiny Town](https://kenney.nl/assets/tiny-town) and [Tiny Dungeon](https://kenney.nl/assets/tiny-dungeon) by Kenney (CC0). See `Assets/Art/LICENSE-*.txt`.
+Grafika: [Tiny Town](https://kenney.nl/assets/tiny-town) a [Tiny Dungeon](https://kenney.nl/assets/tiny-dungeon) od Kenneyho (CC0). Pozri `Assets/Art/LICENSE-*.txt`.
