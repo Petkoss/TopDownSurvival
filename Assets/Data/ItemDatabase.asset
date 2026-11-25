@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd0c8b22cc2f084084bfd11b0441fb0, type: 3}
+  m_Name: ItemDatabase
+  m_EditorClassIdentifier: Survival::Survival.Items.ItemDatabase
+  items:
+  - {fileID: 11400000, guid: 418f75fe3a02ad045b9f7df208ba6d50, type: 2}
+  - {fileID: 11400000, guid: ebe8938a77f85ac4aa462e3b6f64bcb2, type: 2}
+  - {fileID: 11400000, guid: 72590190de8376148bbdb8f0e8be4483, type: 2}
