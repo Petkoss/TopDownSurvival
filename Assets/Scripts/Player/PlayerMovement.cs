@@ -9,11 +9,12 @@ namespace Survival.Player
     {
         [SerializeField] float moveSpeed = 4.5f;
         [SerializeField] float acceleration = 40f;
-        [SerializeField] SpriteRenderer visual;
 
         Rigidbody2D _body;
         InputAction _move;
         Vector2 _input;
+
+        public float MoveSpeed => moveSpeed;
 
         /// <summary>Last non-zero movement direction (normalized).</summary>
         public Vector2 Facing { get; private set; } = Vector2.down;
@@ -26,7 +27,6 @@ namespace Survival.Player
             _body = GetComponent<Rigidbody2D>();
             _body.gravityScale = 0f;
             _body.freezeRotation = true;
-            if (visual == null) visual = GetComponentInChildren<SpriteRenderer>();
 
             _move = new InputAction("Move", InputActionType.Value);
             _move.AddCompositeBinding("2DVector")
@@ -47,11 +47,7 @@ namespace Survival.Player
             _input = OverrideInput ?? _move.ReadValue<Vector2>();
             if (_input.sqrMagnitude > 1f) _input.Normalize();
 
-            if (_input.sqrMagnitude > 0.01f)
-            {
-                Facing = _input.normalized;
-                if (visual != null && Mathf.Abs(_input.x) > 0.01f) visual.flipX = _input.x < 0f;
-            }
+            if (_input.sqrMagnitude > 0.01f) Facing = _input.normalized;
         }
 
         void FixedUpdate()

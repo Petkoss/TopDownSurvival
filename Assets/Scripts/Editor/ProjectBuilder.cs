@@ -233,10 +233,14 @@ namespace Survival.EditorTools
             var playerVisual = new GameObject("Visual");
             playerVisual.transform.SetParent(playerGo.transform, false);
             var playerSr = playerVisual.AddComponent<SpriteRenderer>();
-            playerSr.sprite = LoadSprite("player");
+            playerSr.sprite = LoadSprite("player_down_0");
             playerSr.spriteSortPoint = SpriteSortPoint.Pivot;
             var movement = playerGo.AddComponent<PlayerMovement>();
-            Set(movement, "visual", playerSr);
+            var animator = playerGo.AddComponent<PlayerAnimator>();
+            Set(animator, "visual", playerSr);
+            SetSprites(animator, "walkDown", "player_down");
+            SetSprites(animator, "walkUp", "player_up");
+            SetSprites(animator, "walkSide", "player_side");
             var inventory = playerGo.AddComponent<Inventory>();
             var gatherer = playerGo.AddComponent<PlayerGatherer>();
 
@@ -341,6 +345,26 @@ namespace Survival.EditorTools
             var prop = so.FindProperty(property);
             if (prop == null) throw new System.ArgumentException($"{target.GetType().Name} has no serialized field '{property}'");
             prop.objectReferenceValue = value;
+            so.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        /// <summary>Fills a Sprite[] field with name_0, name_1, ... until a frame is missing.</summary>
+        static void SetSprites(Object target, string property, string prefix)
+        {
+            var frames = new System.Collections.Generic.List<Sprite>();
+            for (int i = 0; ; i++)
+            {
+                var sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{SpriteDir}/{prefix}_{i}.png");
+                if (sprite == null) break;
+                frames.Add(sprite);
+            }
+            if (frames.Count == 0) throw new FileNotFoundException($"No frames for {SpriteDir}/{prefix}_N.png");
+
+            var so = new SerializedObject(target);
+            var prop = so.FindProperty(property);
+            if (prop == null) throw new System.ArgumentException($"{target.GetType().Name} has no serialized field '{property}'");
+            prop.arraySize = frames.Count;
+            for (int i = 0; i < frames.Count; i++) prop.GetArrayElementAtIndex(i).objectReferenceValue = frames[i];
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 

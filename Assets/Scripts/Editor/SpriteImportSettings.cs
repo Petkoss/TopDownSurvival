@@ -35,7 +35,7 @@ namespace Survival.EditorTools
         static bool IsWorldObject(string path)
         {
             string file = System.IO.Path.GetFileNameWithoutExtension(path);
-            return file.StartsWith("tree_") || file == "rock" || file == "mushroom" || file == "player";
+            return file.StartsWith("tree_") || file == "rock" || file == "mushroom" || file.StartsWith("player");
         }
     }
 }
